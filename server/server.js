@@ -42,7 +42,7 @@ const app = express();
 
 app.listen(PORT,function (){
     console.log("=================================================");
-    console.log(`  Server HTTP avviato su https://127.0.0.1:${PORT}`);
+    console.log(`  Server HTTP avviato su http://127.0.0.1:${PORT}`);
     console.log("=================================================");
 });
 
@@ -146,7 +146,12 @@ app.get("/api/students", checkToken, (req, res) => {
 //                { "eta": 20 }
 // ----------------------------------------------------------
 app.post("/api/students/cerca", checkToken, (req, res) => {
-    
+    mongoFunctions.find(DB,C_STUDENTS,req.body,(err,data)=>{
+        if(err.codeErr == -1)
+            res.send({data:data, newToken:req.newToken});
+        else
+            sendError(res,err.codeErr,err.message);
+    });
 });
 
 // ----------------------------------------------------------
@@ -157,7 +162,12 @@ app.post("/api/students/cerca", checkToken, (req, res) => {
 //  Body richiesto: { "cognome": "Rossi" }
 // ----------------------------------------------------------
 app.post("/api/students/cercaPerCognome", checkToken, (req, res) => {
-    
+    mongoFunctions.find(DB,C_STUDENTS,req.body,(err,data)=>{
+        if(err.codeErr == -1)
+            res.send({data:data, newToken:req.newToken});
+        else
+            sendError(res,err.codeErr,err.message);
+    });
 });
 
 // ----------------------------------------------------------
@@ -168,7 +178,12 @@ app.post("/api/students/cercaPerCognome", checkToken, (req, res) => {
 //  Risposta: { msg: "Studente inserito", id: "..." }
 // ----------------------------------------------------------
 app.post("/api/students/inserisci", checkToken, (req, res) => {
-    
+    mongoFunctions.insert(DB,C_STUDENTS,req.body,(err,data)=>{
+        if(err.codeErr == -1)
+            res.send({msg:"Studente inserito", id:data.insertedId, newToken:req.newToken});
+        else
+            sendError(res,err.codeErr,err.message);
+    });
 });
 
 // ----------------------------------------------------------

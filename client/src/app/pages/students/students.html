@@ -1,7 +1,7 @@
 <div class="page-wrapper">
   <!-- Navbar -->
   <nav class="navbar">
-    <span class="navbar-brand">🎓 Gestione Studenti</span>
+    <span class="navbar-brand text-light">🎓 Gestione Studenti</span>
     <div class="navbar-right">
       <button class="btn-stats" (click)="caricaStatistiche()">
         📊 {{ showStats ? 'Nascondi' : 'Statistiche città' }}
@@ -20,7 +20,7 @@
     <div class="alert-error">⚠️ {{ errorMessage }}</div>
     }
 
-    <!--&lt;!&ndash; Statistiche aggregate &ndash;&gt;
+    <!-- Statistiche aggregate &ndash;&gt;
     @if (showStats) {
     <div class="stats-card">
       <h3>📊 Studenti per città (aggregate)</h3>
@@ -35,7 +35,7 @@
   </div>
     }
 
-    &lt;!&ndash; Barra azioni &ndash;&gt;
+    &lt;!&ndash; Barra azioni-->
     <div class="toolbar">
       <div class="search-group">
         <input
@@ -51,18 +51,19 @@
       <button class="btn-primary" (click)="nuovoStudente()">➕ Nuovo studente</button>
     </div>
 
-    &lt;!&ndash; Form inserimento / modifica &ndash;&gt;
+    <!-- Form inserimento / modifica -->
     @if (showForm) {
     <div class="form-card">
       <h3>{{ isEditing ? '✏️ Modifica studente' : '➕ Nuovo studente' }}</h3>
         <div class="form-grid">
           <div class="form-group">
             <label>Nome *</label>
-            <input type="text" [(ngModel)]="formData.nome" placeholder="Nome" />
+            <input type="text" [(ngModel)]="formData.nome" placeholder="Nome" required />
           </div>
           <div class="form-group">
             <label>Cognome *</label>
-            <input type="text" [(ngModel)]="formData.cognome" placeholder="Cognome" />
+            <input type="text" [(ngModel)]="formData.cognome" placeholder="Cognome" required />
+            
           </div>
           <div class="form-group">
             <label>Età</label>
@@ -94,7 +95,7 @@
           <button class="btn-secondary" (click)="annulla()">Annulla</button>
         </div>
       </div>
-    }-->
+    }
 
     <!-- Lista studenti a card -->
     @if (loading) {
